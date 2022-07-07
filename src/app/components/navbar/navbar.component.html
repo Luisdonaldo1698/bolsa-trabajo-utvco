@@ -1,0 +1,28 @@
+<div>
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <img src="https://th.bing.com/th/id/R.1ffb1ff1b9940933d30e8b277d58aa4c?rik=FC6mP4xQ4SvM9A&pid=ImgRaw&r=0" alt="" height="80">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="p-toolbar-group-right">
+            <div class="avatar" (click)="op.toggle($event)">
+                <p-avatar image="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png"></p-avatar>
+                <i class="pi pi-angle-down"></i>
+            </div>
+        </div>
+    </p-toolbar>
+</div>
+
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="item" (click)="op.hide(); goToProfile()">
+            <i class="pi pi-user"></i>
+            <p>Mi perfil</p>
+        </div>
+        <div class="item" (click)="logout()">
+            <i class="pi pi-power-off"></i>
+            <p>Cerrar sesión</p>
+        </div>
+    </ng-template>
+</p-overlayPanel>

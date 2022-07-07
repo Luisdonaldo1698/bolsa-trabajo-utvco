@@ -1,0 +1,152 @@
+<div class="container">
+    <h1>Registrar oferta laboral</h1>
+    <div class="formulario">
+
+        <form [formGroup]="formulario" (ngSubmit)="registrarSintomas()">
+            <!-- descripcion -->
+            <div>
+                <span class="p-float-label">
+                  <input
+                  type="text"
+                  autocomplete="off"
+                  pInputText
+                  formControlName="descripcion"
+                  />
+                  <label for="float-input">Descripcion del empleo</label>
+              </span>
+
+                <div *ngFor="let validacion of validacionMensajes.descripcion">
+                    <div class="mensajeError" *ngIf="validarFormulario('descripcion', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- gravidez -->
+            <!-- <div>
+                <span class="p-float-label">
+                  <input type="text" autocomplete="off" pInputText formControlName="gravidez"/>
+                  <label for="float-input">Gravidez</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.gravidez">
+                    <div class="mensajeError" *ngIf="validarFormulario('gravidez', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div> -->
+
+
+            <div class="gravidez">
+                <p-dropdown [options]="gravidezOptions" formControlName="gravidez" optionLabel="name" placeholder="Seleccionar nivel de ingles "></p-dropdown>
+                <div *ngFor="let validacion of validacionMensajes.gravidez">
+                    <div class="mensajeError" *ngIf="validarFormulario('gravidez', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- dias transcurridos -->
+            <div>
+                <span class="p-float-label">
+                  <input type="number" autocomplete="off" pInputText formControlName="dias"/>
+                  <label for="float-input">Antiguedad de la empresa</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.dias">
+                    <div class="mensajeError" *ngIf="validarFormulario('dias', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- personas -->
+            <div>
+                <span class="p-float-label">
+                  <input type="Text" autocomplete="off" pInputText formControlName="personas"/>
+                  <label for="float-input">Nombre de la empresa</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.personas">
+                    <div class="mensajeError" *ngIf="validarFormulario('personas', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- oxigenacion -->
+            <div>
+                <span class="p-float-label">
+                  <input type="number" autocomplete="off" pInputText formControlName="oxigenacion"/>
+                  <label for="float-input">vacantes disponibles</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.oxigenacion">
+                    <div class="mensajeError" *ngIf="validarFormulario('oxigenacion', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- oxigenacion -->
+            <div>
+                <span class="p-float-label">
+                  <input type="number" autocomplete="off" pInputText formControlName="temperatura"/>
+                  <label for="float-input">codigo postal de la empresa</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.temperatura">
+                    <div class="mensajeError" *ngIf="validarFormulario('temperatura', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- sintomas -->
+            <div class="select-sintomas">
+                <h4>Sector/giro de la empresa</h4>
+            </div>
+            <div class="sintomas">
+                <div class="w100">
+                    <p-checkbox [formControl]="dolorCabeza" [binary]="true" label="Servicios"></p-checkbox>
+                </div>
+                <div class="w100">
+                    <p-checkbox [formControl]="faltaDeGusto" [binary]="true" label="Industrial"></p-checkbox>
+                </div>
+                <div class="w100">
+                    <p-checkbox [formControl]="faltaDeOlfato" [binary]="true" label="Comercios"></p-checkbox>
+                </div>
+                <div class="w100">
+                    <p-checkbox [formControl]="dificultadRespiratoria" [binary]="true" label="agricultura"></p-checkbox>
+                </div>
+                <div class="w100">
+                    <p-checkbox [formControl]="neumonia" [binary]="true" label="escuela"></p-checkbox>
+                </div>
+                <div class="w100">
+                    <div class="w50">
+                        <p-checkbox [formControl]="vomito" [binary]="true" label="centro comercial"></p-checkbox>
+                    </div>
+                    <div class="w50">
+                        <p-checkbox [formControl]="tos" [binary]="true" label="agropecuaria"></p-checkbox>
+                    </div>
+                </div>
+                <div class="w100">
+                    <div class="w50">
+                        <p-checkbox [formControl]="cansancio" [binary]="true" label="ferreta"></p-checkbox>
+                    </div>
+                    <div class="w50">
+                        <p-checkbox [formControl]="diarrea" [binary]="true" label="petrolera"></p-checkbox>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- boton -->
+            <div class="buttonSubmit">
+                <button pButton type="submit" label="Registrar" [disabled]="formulario.invalid" [loading]="loading"></button>
+            </div>
+        </form>
+
+    </div>
+</div>

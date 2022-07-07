@@ -1,0 +1,44 @@
+.container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .formulario {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 400px;
+        max-width: 400px;
+        background-color: white;
+        box-shadow: 5px 5px 10px rgb(73, 73, 73);
+        padding: 20px;
+        border-radius: 10px;
+        input {
+            width: 100%;
+        }
+    }
+    span,
+    .gravidez {
+        margin-top: 25px;
+    }
+    .buttonSubmit {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .select-sintomas {
+        margin-top: 15px;
+    }
+    .sintomas {
+        display: flex;
+        flex-direction: column;
+        .w50 {
+            width: 50%;
+        }
+        .w100 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    }
+}

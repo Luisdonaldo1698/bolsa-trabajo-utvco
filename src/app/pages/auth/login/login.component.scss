@@ -1,0 +1,48 @@
+.container {
+    height: 100vh;
+    position: relative;
+    .header {
+        width: 100%;
+        padding: 20px;
+        background-color: #3DA061;
+        height: 150px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        h2 {
+            color: white;
+            font-size: 2rem;
+        }
+    }
+    .formulario {
+        display: flex;
+        border-radius: 10px;
+        max-width: 300px;
+        background-color: white;
+        box-shadow: 5px 5px 10px rgb(73, 73, 73);
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    span {
+        margin-top: 25px;
+    }
+    .buttonSubmit {
+        text-align: center;
+        margin-top: 25px;
+    }
+}
+
+.toRegister {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    a {
+        font-size: 1.2rem;
+    }
+}

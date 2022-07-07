@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+
+<p-tabView>
+    <p-tabPanel header="Egresados" leftIcon="pi pi-heart" [selected]="true">
+        <app-lista-usuarios rol="doctor"></app-lista-usuarios>
+    </p-tabPanel>
+    <p-tabPanel header="Empresas" leftIcon="pi pi-user">
+        <ng-template pTemplate="content">
+            <app-lista-usuarios rol="paciente"></app-lista-usuarios>
+        </ng-template>
+    </p-tabPanel>
+</p-tabView>

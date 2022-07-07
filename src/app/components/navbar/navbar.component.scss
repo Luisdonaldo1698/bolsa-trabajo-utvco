@@ -1,0 +1,34 @@
+.avatar {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover {
+        background-color: rgb(189, 189, 189);
+    }
+    i {
+        margin-left: 10px;
+    }
+}
+
+g-template {
+    padding: 0 !important;
+}
+
+.item {
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    padding: 5px;
+    &:hover {
+        background-color: rgb(189, 189, 189);
+    }
+    i {
+        margin-right: 10px;
+    }
+    .pi-power-off {
+        color: red;
+    }
+}

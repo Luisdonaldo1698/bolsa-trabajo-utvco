@@ -1,0 +1,87 @@
+.loading {
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+.data {
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(218, 218, 218) !important;
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 20px;
+    .filtro {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        h4 {
+            margin-right: 10px;
+        }
+    }
+}
+
+.customModal {
+    .w50 {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .element {
+        margin-top: 25px;
+        width: 48%;
+    }
+    .title-datos-generales {
+        margin-top: 15px;
+    }
+    .descripcion {
+        margin-top: 25px;
+    }
+    input {
+        width: 100%;
+    }
+    .sintomas {
+        padding-top: 15px;
+        .item-w50 {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .pi {
+            margin-right: 10px;
+        }
+        .pi-check-square {
+            color: red;
+        }
+        .item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 50%;
+        }
+    }
+}
+
+.conReceta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    .registro {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        p {
+            margin-right: 15px;
+        }
+    }
+}

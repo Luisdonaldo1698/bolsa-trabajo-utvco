@@ -1,0 +1,59 @@
+<div class="header">
+    <h2>Mi perfil</h2>
+</div>
+
+<div class="formulario">
+    <form [formGroup]="formulario" (ngSubmit)="updateProfile()">
+        <!-- nombre -->
+        <div>
+            <span class="p-float-label">
+              <input type="text" autocomplete="off" pInputText formControlName="nombre"/>
+              <label for="float-input">Nombre</label>
+            </span>
+        </div>
+
+        <!-- email -->
+        <div>
+            <span class="p-float-label">
+              <input type="text" autocomplete="off" pInputText formControlName="email"/>
+              <label for="float-input">Correo electrónico</label>
+            </span>
+        </div>
+
+
+        <!-- telefono -->
+        <div>
+            <span class="p-float-label">
+            <input type="number" autocomplete="off" pInputText formControlName="telefono"/>
+            <label for="float-input">Telefono</label>
+          </span>
+        </div>
+
+        <!-- edad -->
+        <div>
+            <span class="p-float-label">
+              <input type="number" autocomplete="off" pInputText formControlName="edad" maxlength="2"/>
+              <label for="float-input">Edad</label>
+            </span>
+        </div>
+
+        <!-- cedula -->
+        <div *ngIf="rol === 'doctor'">
+            <span class="p-float-label">
+              <input type="text" autocomplete="off" pInputText formControlName="cedula" maxlength="50"/>
+              <label for="float-input">nombre de la empresa</label>
+            </span>
+        </div>
+
+        <div class="sexo">
+            <p-dropdown [options]="sexoOptions" formControlName="sexo" optionLabel="name" placeholder="Sexo"></p-dropdown>
+        </div>
+
+        <!-- submit -->
+        <div class="buttonSubmit">
+            <button pButton type="submit" label="Actualizar perfil" [disabled]="formulario.invalid" [loading]="loading"></button>
+
+        </div>
+
+    </form>
+</div>

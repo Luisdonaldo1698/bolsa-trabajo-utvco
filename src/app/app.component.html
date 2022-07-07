@@ -1,0 +1,6 @@
+<div class="main">
+    <router-outlet></router-outlet>
+    <div class="installButtonbanner" *ngIf="installEvent">
+        <button pButton type="button" (click)="installByUser()" label="Instalar app" class="p-button-outlined p-button-primary"></button>
+    </div>
+</div>

@@ -1,0 +1,171 @@
+<div class="header">
+
+    <div class="filtro">
+        <h4>Filtro por fecha</h4>
+        <p-calendar [(ngModel)]="fecha" dateFormat="yy-mm-dd" [showButtonBar]="true" (onSelect)="filtroFecha()"></p-calendar>
+    </div>
+</div>
+
+
+
+<div class="loading" *ngIf="loading">
+    <p-progressSpinner strokeWidth="3"></p-progressSpinner>
+</div>
+
+<div *ngIf="!loading">
+    <p-table [value]="registros">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Empresa</th>
+                <th>Email</th>
+                <th>Fecha</th>
+                <th>hora</th>
+                <th>Publicacion</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-registro>
+            <tr class="data" (click)="showDialog(registro)">
+                <td>{{registro.paciente.nombre}}</td>
+                <td>{{registro.paciente.email}}</td>
+                <td>{{registro.fecha | momentDate}}</td>
+                <td>{{registro.hora}}</td>
+                <td *ngIf="registro.recetaUrl"><button pButton type="button" class="p-button-rounded p-button-outlined" label="Ver receta" icon="pi pi-plus" iconPos="left" (click)="verReceta(registro.recetaUrl)"></button></td>
+                <td *ngIf="!registro.recetaUrl">Postularme </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog header="Detalle del registro" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" [modal]="true">
+    <div class="customModal">
+        <!-- datos del paciente -->
+        <div class="paciente">
+            <h4>Datos de la empresa</h4>
+            <div class="w50">
+                <div class="element">
+                    <span class="p-float-label">
+                <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.paciente.nombre"/>
+                <label for="float-input">Nombre</label>
+              </span>
+                </div>
+                <div class="element">
+                    <span class="p-float-label">
+                <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.paciente.email"/>
+                <label for="float-input">Correo electrónico</label>
+              </span>
+                </div>
+            </div>
+        </div>
+        <!-- datos -->
+        <div>
+            <div class="title-datos-generales">
+                <h4>Datos generales</h4>
+            </div>
+            <div class="w50">
+                <div class="element">
+                    <span class="p-float-label">
+                <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.oxigenacion"/>
+                <label for="float-input">Sucursales</label>
+              </span>
+                </div>
+                <div class="element">
+                    <span class="p-float-label">
+              <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.gravidez"/>
+              <label for="float-input">Nivel de ingles para el empleo</label>
+            </span>
+                </div>
+            </div>
+            <div class="w50">
+                <div class="element">
+                    <span class="p-float-label">
+                <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.diasTranscurridos"/>
+                <label for="float-input">vacantes disponibles</label>
+              </span>
+                </div>
+                <div class="element">
+                    <span class="p-float-label">
+                <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.personasConvividas"/>
+                <label for="float-input">Codigo postal</label>
+              </span>
+                </div>
+            </div>
+            <div class="descripcion">
+                <span class="p-float-label">
+                  <input type="text" autocomplete="off" pInputText disabled="true" [(ngModel)]="registroPaciente.descripcion"/>
+                  <label for="float-input">Descripcion del empleo</label>
+                </span>
+            </div>
+        </div>
+        <!-- sintomas -->
+        <div class="sintomas">
+            <h4>Habilidades requeridas para el empleo</h4>
+            <div class="item-w50">
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.dolorCabeza"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.dolorCabeza"></i>
+                    <p>ingles</p>
+                </div>
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.faltaDeGusto"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.faltaDeGusto"></i>
+                    <p>Proactivo</p>
+                </div>
+            </div>
+            <div class="item-w50">
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.faltaDeOlfato"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.faltaDeOlfato"></i>
+                    <p>Compromiso</p>
+                </div>
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.dificultadRespiratoria"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.dificultadRespiratoria"></i>
+                    <p>Responsabilidad</p>
+                </div>
+            </div>
+            <div class="item-w50">
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.neumonia"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.neumonia"></i>
+                    <p>Trabajo en equipo</p>
+                </div>
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.vomito"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.vomito"></i>
+                    <p>adaptabilidad</p>
+                </div>
+            </div>
+            <div class="item-w50">
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.tos"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.tos"></i>
+                    <p>interes</p>
+                </div>
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.cansancio"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.cansancio"></i>
+                    <p>Lider</p>
+                </div>
+            </div>
+            <div class="item-w50">
+                <div class="item">
+                    <i class="pi pi-times-circle" *ngIf="!registroPaciente.sintomas.diarrea"></i>
+                    <i class="pi pi-check-square" *ngIf="registroPaciente.sintomas.diarrea"></i>
+                    <p>Respeto</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <button pButton type="button" class="p-button-raised p-button-rounded" label="Postularme para el empleo" (click)="goToGenerarReceta()" *ngIf="!registroPaciente.recetaUrl"></button>
+        <div *ngIf="registroPaciente.recetaUrl" class="conReceta">
+            <div></div>
+            <div class="registro">
+                <p>Este registro ya tiene una vacante</p>
+                <button pButton type="button" class="p-button-raised p-button-rounded" label="Ver Empresa" (click)="verReceta(registroPaciente.recetaUrl)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

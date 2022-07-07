@@ -1,0 +1,43 @@
+<h2>Lista de {{rol === 'egresado' ? "egresados":"usuarios"}}</h2>
+
+<div class="loading" *ngIf="loading">
+    <p-progressSpinner strokeWidth="3"></p-progressSpinner>
+</div>
+
+<div *ngIf="!loading && rol === 'paciente'">
+    <p-table [value]="pacientes">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-paciente>
+            <tr class="data">
+                <td>{{paciente.nombre}}</td>
+                <td>{{paciente.email}}</td>
+                <td><i class="pi pi-trash" (click)="eliminarUsuario(paciente)"></i></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<div *ngIf="!loading && rol === 'doctor'">
+    <p-table [value]="doctores">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-doctor>
+            <tr class="data">
+                <td>{{doctor.nombre}}</td>
+                <td>{{doctor.email}}</td>
+                <td><i class="pi pi-trash" (click)="eliminarUsuario(doctor)"></i></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

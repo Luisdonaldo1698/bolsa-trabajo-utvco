@@ -1,0 +1,10 @@
+{
+    "hosting": {
+        "public": "dist/clinico",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ]
+    }
+}

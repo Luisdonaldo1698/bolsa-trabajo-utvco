@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="header">
+        <h2>Registro</h2>
+    </div>
+
+    <div class="formulario">
+        <div class="roles">
+            <div [ngClass]="{ rolSelected: rol === 'egresado', rolUnselected: true }" (click)="changeRol('egresado')">
+                <h4>Egresado</h4>
+            </div>
+            <div [ngClass]="{ rolSelected: rol === 'empresario', rolUnselected: true }" (click)="changeRol('empresario')">
+                <h4>Empresario</h4>
+            </div>
+        </div>
+        <form [formGroup]="formulario" (ngSubmit)="register()">
+            <!-- nombre -->
+            <div>
+                <span class="p-float-label">
+                    <input type="text" autocomplete="off" pInputText formControlName="nombre" />
+                    <label for="float-input">Nombre</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.nombre">
+                    <div class="mensajeError" *ngIf="validarFormulario('nombre', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- email -->
+            <div>
+                <span class="p-float-label">
+                    <input type="email" autocomplete="off" pInputText formControlName="email" />
+                    <label for="float-input">Correo electrónico</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.email">
+                    <div class="mensajeError" *ngIf="validarFormulario('email', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- password -->
+            <div>
+                <span class="p-float-label">
+                    <input type="password" autocomplete="off" pInputText formControlName="password" />
+                    <label for="float-input">Contraseña</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.password">
+                    <div class="mensajeError" *ngIf="validarFormulario('password', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <!-- confirm password -->
+            <div>
+                <span class="p-float-label">
+                    <input type="password" autocomplete="off" pInputText formControlName="confirm_password" />
+                    <label for="float-input">Confirmar contraseña</label>
+                </span>
+
+                <div *ngFor="let validacion of validacionMensajes.confirm_password">
+                    <div class="mensajeError" *ngIf="validarFormulario('confirm_password', validacion.type)">
+                        {{ validacion.message }} *
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttonSubmit">
+                <button pButton type="submit" label="Registrarme" [disabled]="formulario.invalid"
+                    [loading]="loading"></button>
+
+            </div>
+
+            <div class="toLogin">
+                <a routerLink="/login">Iniciar sesión</a>
+            </div>
+
+        </form>
+    </div>
+</div>
