@@ -22,6 +22,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EgresadoModule } from './pages/egresados/egresado/egresado.module';
 import { EmpresarioModule } from './pages/empresarios/empresario/empresario.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { EmpresarioModule } from './pages/empresarios/empresario/empresario.modu
     AngularFireStorageModule,
     AngularFireMessagingModule,
     AngularFirestoreModule,
+    HttpClientModule,
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

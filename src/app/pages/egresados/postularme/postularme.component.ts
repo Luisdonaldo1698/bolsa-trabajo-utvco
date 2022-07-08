@@ -26,6 +26,8 @@ export class PostularmeComponent implements OnInit {
 
   recomendacionesGenerales: string = '';
   medicamentos: MedicamentoModel[] = [];
+  uploadedFiles: any[] = [];
+
 
   validacionMensajes = {
     'nombre': [
@@ -61,10 +63,6 @@ export class PostularmeComponent implements OnInit {
   }
 
   async generarReceta(urlPdf?: string){
-    if(this.recomendacionesGenerales.trim().length < 1 && this.medicamentos.length < 1){
-      this.alertService.showAlert('Receta incompleta', 'Debe agregar recomendaciones generales o medicamentos para proceder', 'warning');
-      return;
-    }
     const momentDate = moment().format('YYYY-MM-DD');
     const momenthour = moment().format('HH:mm:ss');
     console.log(this.formulario.value);
@@ -93,14 +91,13 @@ export class PostularmeComponent implements OnInit {
     })
   }
 
-  agregarMedicamento(){
-    const medicamento: MedicamentoModel = {
-      nombre: this.formulario.get('nombre')?.value,
-      recomendacion: this.formulario.get('recomendacion')?.value,
-    }
-    this.medicamentos.push(medicamento);
-    this.formulario.reset();
-    this.display = false;
+  uploadFile(event:any) :void{
+    this.loading = true;
+    const registro = this.doctorService.getRegistro();
+    const file = event.files[0];
+    this.doctorService.subirPdfFirebase(registro.id!, file).then(resp => {
+      this.generarReceta(resp);
+    });
   }
 
   showDialog() {
@@ -109,72 +106,6 @@ export class PostularmeComponent implements OnInit {
 
   clearForm(){
     this.formulario.reset();
-  }
-
-  generarPdf(save: boolean){
-    this.loading = true;
-    const registro = this.doctorService.getRegistro();
-    const pdf = new PdfMakeWrapper();
-    pdf.pageSize('A4');
-    pdf.pageOrientation('portrait');
-    pdf.pageMargins(20);
-    const user = this.authService.user;
-    const momentDate = moment().format('YYYY-MM-DD');
-    const momenthour = moment().format('HH:mm:ss');
-
-    if(this.recomendacionesGenerales.trim().length > 0){
-      pdf.add(
-        new Stack([
-          `Doctor: ${user?.nombre.toUpperCase()}`,
-          `Cédula: ${user?.cedula ? user.cedula: 'NA'}`,
-          `Fecha: ${momentDate}`,
-          `Paciente: ${registro.paciente.nombre.toUpperCase()}`
-        ]).margin([30, 15, 30, 5]).bold().end
-      );
-    }
-
-    if(this.recomendacionesGenerales.trim().length > 0){
-      pdf.add(
-        new Stack([
-          'Recomendaciones generales:'
-        ]).margin([30, 15, 30, 5]).bold().end
-      );
-      pdf.add(
-        new Stack([
-          `${this.recomendacionesGenerales}`,
-        ]).margin([30, 0, 30, 0]).end
-      );
-    }
-
-    if(this.medicamentos.length > 0) {
-      pdf.add(
-        new Stack([
-          'Tratamiento:'
-        ]).margin([30, 15, 30, 0]).bold().end
-      );
-      this.medicamentos.forEach((tratamiento, indice) => {
-        pdf.add(
-          new Stack([
-            `${ indice + 1 }.- ${ tratamiento.nombre }, ${ tratamiento.recomendacion }`,
-          ]).margin([30, 10, 30, 0]).end
-        );
-        pdf.add(
-          new Stack([
-            `${ tratamiento.recomendacion }`
-          ]).margin([50, 0, 30, 10]).end
-        );
-      });
-    }
-    if(save)
-    pdf.create().getBlob(pdf => {
-      this.doctorService.subirPdfFirebase(registro.id!, pdf).then(resp => {
-        this.generarReceta(resp);
-      });
-    });
-    else{
-      this.loading = false;
-      pdf.create().open()
-    }
   }
 
 }

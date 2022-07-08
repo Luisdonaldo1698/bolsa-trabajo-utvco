@@ -14,6 +14,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
 
 const modules = [
   InputTextModule,
@@ -29,6 +30,7 @@ const modules = [
   CheckboxModule,
   DialogModule,
   InputTextareaModule,
+  FileUploadModule,
 ]
 
 @NgModule({

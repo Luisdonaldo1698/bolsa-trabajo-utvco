@@ -20,7 +20,7 @@
             <tr class="data">
                 <td>{{registro.fecha | momentDate}}</td>
                 <td>{{registro.hora}}</td>
-                <td *ngIf="registro.recetaUrl"><button pButton type="button" class="p-button-rounded p-button-outlined" label="Ver receta" icon="pi pi-plus" iconPos="left" (click)="verReceta(registro.recetaUrl)"></button></td>
+                <td *ngIf="registro.recetaUrl"><button pButton type="button" class="p-button-rounded p-button-outlined" label="Ver curriculum" icon="pi pi-plus" iconPos="left" (click)="verReceta(registro.recetaUrl)"></button></td>
                 <td *ngIf="!registro.recetaUrl">Sin vacante aun</td>
             </tr>
         </ng-template>

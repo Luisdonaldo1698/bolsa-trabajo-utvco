@@ -29,7 +29,7 @@
                 <td>{{registro.paciente.email}}</td>
                 <td>{{registro.fecha | momentDate}}</td>
                 <td>{{registro.hora}}</td>
-                <td *ngIf="registro.recetaUrl"><button pButton type="button" class="p-button-rounded p-button-outlined" label="Ver receta" icon="pi pi-plus" iconPos="left" (click)="verReceta(registro.recetaUrl)"></button></td>
+                <td *ngIf="registro.recetaUrl"><button pButton type="button" class="p-button-rounded p-button-outlined" label="Ver Curriculum" icon="pi pi-plus" iconPos="left" (click)="verReceta(registro.recetaUrl)"></button></td>
                 <td *ngIf="!registro.recetaUrl">Postularme </td>
             </tr>
         </ng-template>

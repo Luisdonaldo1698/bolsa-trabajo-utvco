@@ -95,7 +95,7 @@ export class RegistrosComponent implements OnInit, OnDestroy {
 
   goToGenerarReceta(){
     this.doctorService.saveRegistro(this.registroPaciente);
-    this.router.navigate(['empresario/crear-receta']);
+    this.router.navigate(['egresado/crear-receta']);
   }
 
   verReceta(recetaUrl: string){
