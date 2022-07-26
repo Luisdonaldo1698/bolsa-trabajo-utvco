@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RegistrarSintomasModel } from 'src/app/models/registrar-sintomas.model';
 import { AuthService } from '../../../services/auth.service';
-import { PacienteService } from '../../../services/paciente.service';
 import { AlertService } from '../../../services/alert.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { EmpresarioService } from '../../../services/empresario.service';
 
 @Component({
   selector: 'app-paciente-registros',
@@ -21,7 +21,7 @@ export class EmpresarioRegistrosComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private pacienteService: PacienteService,
+    private empresarioService: EmpresarioService,
     private alertService: AlertService,
     private router: Router,
   ) {
@@ -41,7 +41,7 @@ export class EmpresarioRegistrosComponent implements OnInit, OnDestroy {
   getRegistros(){
     this.loading = true;
     const userId = this.authService.user?.userId;
-    this.pacienteService.listarRegistros(userId!)
+    this.empresarioService.listarRegistros(userId!)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(resp => {
         this.registros = resp;

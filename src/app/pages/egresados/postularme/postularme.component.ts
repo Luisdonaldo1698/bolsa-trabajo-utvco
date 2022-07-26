@@ -5,10 +5,10 @@ import * as moment from 'moment';
 import { RecetaModel } from '../../../models/receta.model';
 import { MedicamentoModel } from '../../../models/medicamento.model';
 import { AuthService } from '../../../services/auth.service';
-import { DoctorService } from '../../../services/doctor.service';
 import { Router } from '@angular/router';
 import { PdfMakeWrapper, Stack} from 'pdfmake-wrapper';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { EgresadoService } from 'src/app/services/egresado.service';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -43,7 +43,7 @@ export class PostularmeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private authService: AuthService,
-    private doctorService: DoctorService,
+    private egresadoService: EgresadoService,
     private router: Router,
   ) {}
 
@@ -66,7 +66,7 @@ export class PostularmeComponent implements OnInit {
     const momentDate = moment().format('YYYY-MM-DD');
     const momenthour = moment().format('HH:mm:ss');
     console.log(this.formulario.value);
-    const registro = this.doctorService.getRegistro();
+    const registro = this.egresadoService.getRegistro();
     const receta : RecetaModel = {
       fecha: momentDate,
       hora: momenthour,
@@ -77,11 +77,11 @@ export class PostularmeComponent implements OnInit {
       url: urlPdf,
     }
     console.log(receta);
-    this.doctorService.generarReceta(receta).then(async (resp) => {
+    this.egresadoService.generarReceta(receta).then(async (resp) => {
       console.log(resp.id);
-      await this.doctorService.updateRegistroConReceta(receta.url!, registro.id!);
-      this.doctorService.clearRegistro();
-      this.alertService.showToast('Receta creada exitosamente', 'success');
+      await this.egresadoService.updateRegistroConReceta(receta.url!, registro.id!);
+      this.egresadoService.clearRegistro();
+      this.alertService.showToast('Curriculum cargado exitosamente', 'success');
       this.loading = false;
       this.router.navigate(['/egresado']);
     }).catch(err => {+
@@ -93,9 +93,9 @@ export class PostularmeComponent implements OnInit {
 
   uploadFile(event:any) :void{
     this.loading = true;
-    const registro = this.doctorService.getRegistro();
+    const registro = this.egresadoService.getRegistro();
     const file = event.files[0];
-    this.doctorService.subirPdfFirebase(registro.id!, file).then(resp => {
+    this.egresadoService.subirPdfFirebase(registro.id!, file).then(resp => {
       this.generarReceta(resp);
     });
   }

@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Roles } from '../../models/userRol.enum';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
-import { DoctorService } from '../../services/doctor.service';
 import { AlertService } from '../../services/alert.service';
+import { EgresadoService } from '../../services/egresado.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private doctorService: DoctorService,
+    private egresadoService: EgresadoService,
     private alertService: AlertService,
   ) {
     this.sexoOptions = [
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
     this.loading = true;
     try {
       if(this.rol === Roles.EGRESADO){
-        const resp = await this.doctorService.updateProfile(this.user.id!, this.formulario.value);
+        const resp = await this.egresadoService.updateProfile(this.user.id!, this.formulario.value);
         this.alertService.showAlert('Perfil actualizado', 'Se ha actualizado tu perfil correctamente', 'success');
         this.loading = false;
       }

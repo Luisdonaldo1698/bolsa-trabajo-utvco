@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { RegistrarSintomasModel, SintomasModel } from '../../../models/registrar-sintomas.model';
-import { PacienteService } from '../../../services/paciente.service';
 import { AuthService } from '../../../services/auth.service';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { EmpresarioService } from '../../../services/empresario.service';
 
 @Component({
   selector: 'app-registrar-sintomas',
@@ -63,7 +63,7 @@ export class RegistrarVacanteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private pacienteService: PacienteService,
+    private empresarioService: EmpresarioService,
     private authService: AuthService,
     private router: Router,
   ) {
@@ -132,7 +132,7 @@ export class RegistrarVacanteComponent implements OnInit {
     }
     console.log(sintomas);
     try {
-      const resp = await this.pacienteService.registrarSintomas(sintomas)
+      const resp = await this.empresarioService.registrarSintomas(sintomas)
       console.log(resp)
       this.alertService.showToast('Propuesta de trabajo registrada', 'success');
       this.formulario.reset();

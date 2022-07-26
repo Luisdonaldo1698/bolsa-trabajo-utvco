@@ -6,7 +6,7 @@ import { RegistrarSintomasModel } from '../models/registrar-sintomas.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PacienteService {
+export class EmpresarioService {
   private registrosCollection: AngularFirestoreCollection<RegistrarSintomasModel>;
 
   constructor(

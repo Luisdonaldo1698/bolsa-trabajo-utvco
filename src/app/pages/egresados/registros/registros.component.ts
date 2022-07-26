@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RegistrarSintomasModel } from '../../../models/registrar-sintomas.model';
-import { DoctorService } from '../../../services/doctor.service';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { EgresadoService } from '../../../services/egresado.service';
 
 @Component({
   selector: 'app-registros',
@@ -49,7 +49,7 @@ export class RegistrosComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<boolean>;
 
   constructor(
-    private doctorService: DoctorService,
+    private egresadoService: EgresadoService,
     private router: Router,
   ) {
     this._unsubscribeAll = new Subject();
@@ -76,7 +76,7 @@ export class RegistrosComponent implements OnInit, OnDestroy {
       fecha = moment().format('YYYY-MM-DD');
     }
     this.loading = true;
-    this.doctorService.listarRegistros(fecha)
+    this.egresadoService.listarRegistros(fecha)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(resp => {
         console.log(resp);
@@ -94,7 +94,7 @@ export class RegistrosComponent implements OnInit, OnDestroy {
   }
 
   goToGenerarReceta(){
-    this.doctorService.saveRegistro(this.registroPaciente);
+    this.egresadoService.saveRegistro(this.registroPaciente);
     this.router.navigate(['egresado/crear-receta']);
   }
 

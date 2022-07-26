@@ -9,7 +9,7 @@ import { UserModel } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService {
+export class EgresadoService {
 
   private registrosCollection: AngularFirestoreCollection<RegistrarSintomasModel>;
   private recetaCollection: AngularFirestoreCollection<RecetaModel>;
